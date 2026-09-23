@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Subjects - School Management System</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f4f6f8;
+        color: #333;
+    }
+
+    header {
+        background: #1e3a8a;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        margin-bottom: 15px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    main {
+        width: 90%;
+        max-width: 1100px;
+        margin: 40px auto;
+    }
+
+    main > h2 {
+        text-align: center;
+        color: #1e3a8a;
+        margin-bottom: 30px;
+    }
+
+    .form-section,
+    .subjects-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        color: #1e3a8a;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: grid;
+        gap: 10px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        background: #1e3a8a;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background: #162d6b;
+    }
+
+    .edit-btn {
+        background: #f59e0b;
+        margin-right: 5px;
+    }
+
+    .delete-btn {
+        background: #dc2626;
+    }
+
+    .cancel-btn {
+        background: #6b7280;
+        display: none;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background: #1e3a8a;
+        color: white;
+    }
+
+    footer {
+        background: #1e3a8a;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<header>
+    <h1>School Management System</h1>
+
+```
+<nav>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/students">Students</a>
+    <a href="/teachers">Teachers</a>
+    <a href="/subjects">Subjects</a>
+    <a href="/classes">Classes</a>
+    <a href="/contact">Contact</a>
+</nav>
+```
+
+</header>
+
+<main>
+
+```
+<h2>Subjects Management</h2>
+
+<section class="form-section">
+
+    <h3 id="formTitle">Add New Subject</h3>
+
+    <form id="subjectForm">
+
+        <input type="hidden" id="subjectId">
+
+        <label for="subjectName">
+            Subject Name:
+        </label>
+
+        <input
+            type="text"
+            id="subjectName"
+            placeholder="Example: Mathematics"
+            required
+        >
+
+        <label for="subjectCode">
+            Subject Code:
+        </label>
+
+        <input
+            type="text"
+            id="subjectCode"
+            placeholder="Example: MATH101"
+            required
+        >
+
+        <div class="button-group">
+
+            <button
+                type="submit"
+                id="submitBtn"
+            >
+                Add Subject
+            </button>
+
+            <button
+                type="button"
+                id="cancelBtn"
+                class="cancel-btn"
+                onclick="resetForm()"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+<section class="subjects-section">
+
+    <h3>Subjects List</h3>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Subject Name</th>
+                <th>Subject Code</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="subjectsTable">
+        </tbody>
+
+    </table>
+
+</section>
+```
+
+</main>
+
+<footer>
+    <p>&copy; 2026 School Management System</p>
+</footer>
+
+<script>
+
+    const subjectForm =
+        document.getElementById('subjectForm');
+
+    const subjectId =
+        document.getElementById('subjectId');
+
+    const subjectName =
+        document.getElementById('subjectName');
+
+    const subjectCode =
+        document.getElementById('subjectCode');
+
+    const submitBtn =
+        document.getElementById('submitBtn');
+
+    const cancelBtn =
+        document.getElementById('cancelBtn');
+
+    const formTitle =
+        document.getElementById('formTitle');
+
+    const subjectsTable =
+        document.getElementById('subjectsTable');
+
+
+    // LOAD SUBJECTS
+
+    function loadSubjects() {
+
+        fetch('/api/subjects')
+
+            .then(response => response.json())
+
+            .then(subjects => {
+
+                subjectsTable.innerHTML = '';
+
+
+                if (subjects.length === 0) {
+
+                    subjectsTable.innerHTML = `
+                        <tr>
+                            <td colspan="4"
+                                style="text-align:center;">
+                                No subjects found
+                            </td>
+                        </tr>
+                    `;
+
+                    return;
+
+                }
+
+
+                subjects.forEach(subject => {
+
+                    const row =
+                        document.createElement('tr');
+
+
+                    row.innerHTML = `
+                        <td>${subject.id}</td>
+
+                        <td>${subject.name}</td>
+
+                        <td>${subject.code}</td>
+
+                        <td>
+
+                            <button
+                                class="edit-btn"
+                                onclick="editSubject(
+                                    ${subject.id}
+                                )"
+                            >
+                                Edit
+                            </button>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteSubject(
+                                    ${subject.id}
+                                )"
+                            >
+                                Delete
+                            </button>
+
+                        </td>
+                    `;
+
+
+                    subjectsTable.appendChild(row);
+
+                });
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    'Error loading subjects:',
+                    error
+                );
+
+            });
+
+    }
+
+
+    loadSubjects();
+
+
+    // ADD OR UPDATE
+
+    subjectForm.addEventListener(
+        'submit',
+        function(event) {
+
+            event.preventDefault();
+
+
+            const id =
+                subjectId.value;
+
+            const name =
+                subjectName.value.trim();
+
+            const code =
+                subjectCode.value.trim();
+
+
+            if (!name || !code) {
+
+                alert(
+                    'Please fill in all fields'
+                );
+
+                return;
+
+            }
+
+
+            // UPDATE
+
+            if (id) {
+
+                fetch(
+                    '/api/subjects/' + id,
+                    {
+                        method: 'PUT',
+
+                        headers: {
+                            'Content-Type':
+                                'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            name: name,
+                            code: code
+                        })
+                    }
+                )
+
+                    .then(response =>
+                        response.json()
+                    )
+
+                    .then(data => {
+
+                        alert(data.message);
+
+                        resetForm();
+
+                        loadSubjects();
+
+                    });
+
+            }
+
+
+            // ADD
+
+            else {
+
+                fetch(
+                    '/subjects',
+                    {
+                        method: 'POST',
+
+                        headers: {
+                            'Content-Type':
+                                'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            name: name,
+                            code: code
+                        })
+                    }
+                )
+
+                    .then(response =>
+                        response.json()
+                    )
+
+                    .then(data => {
+
+                        alert(
+                            data.message ||
+                            'Subject added successfully'
+                        );
+
+                        resetForm();
+
+                        loadSubjects();
+
+                    });
+
+            }
+
+        }
+    );
+
+
+    // EDIT SUBJECT
+
+    function editSubject(id) {
+
+        fetch('/api/subjects')
+
+            .then(response =>
+                response.json()
+            )
+
+            .then(subjects => {
+
+                const subject =
+                    subjects.find(
+                        subject =>
+                            subject.id == id
+                    );
+
+
+                if (!subject) {
+
+                    alert(
+                        'Subject not found'
+                    );
+
+                    return;
+
+                }
+
+
+                subjectId.value =
+                    subject.id;
+
+                subjectName.value =
+                    subject.name;
+
+                subjectCode.value =
+                    subject.code;
+
+
+                formTitle.textContent =
+                    'Edit Subject';
+
+                submitBtn.textContent =
+                    'Update Subject';
+
+                cancelBtn.style.display =
+                    'block';
+
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+
+            });
+
+    }
+
+
+    // RESET FORM
+
+    function resetForm() {
+
+        subjectForm.reset();
+
+        subjectId.value = '';
+
+        formTitle.textContent =
+            'Add New Subject';
+
+        submitBtn.textContent =
+            'Add Subject';
+
+        cancelBtn.style.display =
+            'none';
+
+    }
+
+
+    // DELETE SUBJECT
+
+    function deleteSubject(id) {
+
+        const answer =
+            confirm(
+                'Are you sure you want to delete this subject?'
+            );
+
+
+        if (!answer) {
+
+            return;
+
+        }
+
+
+        fetch(
+            '/api/subjects/' + id,
+            {
+                method: 'DELETE'
+            }
+        )
+
+            .then(response =>
+                response.json()
+            )
+
+            .then(data => {
+
+                alert(data.message);
+
+                loadSubjects();
+
+            })
+
+            .catch(error => {
+
+                console.error(error);
+
+            });
+
+    }
+
+</script>
+
+</body>
+</html>

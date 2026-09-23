@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Contact Us - School Management System
+</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #f4f6f8;
+        color: #333;
+    }
+
+    header {
+        background: #1e3a8a;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        margin-bottom: 15px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    main {
+        width: 90%;
+        max-width: 1000px;
+        margin: 40px auto;
+    }
+
+    main > h2 {
+        text-align: center;
+        color: #1e3a8a;
+        margin-bottom: 30px;
+    }
+
+    .contact-container {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+    }
+
+    .contact-info,
+    .contact-form {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow:
+            0 3px 10px
+            rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        color: #1e3a8a;
+        margin-bottom: 20px;
+    }
+
+    p {
+        line-height: 1.8;
+        margin-bottom: 15px;
+    }
+
+    form {
+        display: grid;
+        gap: 12px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+    }
+
+    textarea {
+        min-height: 130px;
+        resize: vertical;
+    }
+
+    button {
+        background: #1e3a8a;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background: #162d6b;
+    }
+
+    footer {
+        background: #1e3a8a;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<header>
+
+```
+<h1>
+    School Management System
+</h1>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/students">Students</a>
+    <a href="/teachers">Teachers</a>
+    <a href="/subjects">Subjects</a>
+    <a href="/classes">Classes</a>
+    <a href="/contact">Contact</a>
+</nav>
+```
+
+</header>
+
+<main>
+
+```
+<h2>
+    Contact Us
+</h2>
+
+
+<div class="contact-container">
+
+
+    <!-- CONTACT INFORMATION -->
+
+    <section class="contact-info">
+
+        <h3>
+            Get In Touch
+        </h3>
+
+        <p>
+            Contact us for more information about
+            our School Management System.
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            info@schoolmanagement.com
+        </p>
+
+        <p>
+            <strong>Phone:</strong>
+            +250 700 000 000
+        </p>
+
+        <p>
+            <strong>Location:</strong>
+            Kigali, Rwanda
+        </p>
+
+    </section>
+
+
+
+    <!-- CONTACT FORM -->
+
+    <section class="contact-form">
+
+        <h3>
+            Send Us a Message
+        </h3>
+
+
+        <form id="contactForm">
+
+
+            <label for="contactName">
+                Your Name:
+            </label>
+
+            <input
+                type="text"
+                id="contactName"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label for="email">
+                Email:
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label for="message">
+                Message:
+            </label>
+
+            <textarea
+                id="message"
+                placeholder="Write your message here..."
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                Send Message
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+</div>
+```
+
+</main>
+
+<footer>
+
+```
+<p>
+    &copy; 2026 School Management System
+</p>
+```
+
+</footer>
+
+<script>
+
+    const contactForm =
+        document.getElementById('contactForm');
+
+
+    contactForm.addEventListener(
+        'submit',
+        function(event) {
+
+            event.preventDefault();
+
+
+            alert(
+                'Thank you! Your message has been received.'
+            );
+
+
+            contactForm.reset();
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>

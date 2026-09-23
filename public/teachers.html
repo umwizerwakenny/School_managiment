@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Teachers - School Management System
+</title>
+
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+
+    body {
+        background: #f4f6f8;
+        color: #333;
+    }
+
+
+    header {
+        background: #1e3a8a;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+
+    header h1 {
+        margin-bottom: 15px;
+    }
+
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+
+    nav a {
+        color: white;
+        text-decoration: none;
+                   font-weight: bold;
+    }
+
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+
+    main {
+        width: 90%;
+        max-width: 1100px;
+        margin: 40px auto;
+    }
+
+
+    main > h2 {
+        text-align: center;
+        color: #1e3a8a;
+        margin-bottom: 30px;
+    }
+
+
+    .form-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow:
+            0 3px 10px
+            rgba(0, 0, 0, 0.1);
+    }
+
+
+    .form-section h3 {
+        color: #1e3a8a;
+        margin-bottom: 20px;
+    }
+
+
+    form {
+        display: grid;
+        gap: 10px;
+    }
+
+
+    label {
+        font-weight: bold;
+    }
+
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+
+    input:focus {
+        outline: none;
+        border-color: #1e3a8a;
+    }
+
+
+    button {
+        background: #1e3a8a;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+
+    button:hover {
+        background: #162d6b;
+    }
+
+
+    .teachers-section {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow:
+            0 3px 10px
+            rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+    }
+
+
+    .teachers-section h3 {
+        color: #1e3a8a;
+        margin-bottom: 20px;
+    }
+
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+
+    th,
+    td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+
+    th {
+        background: #1e3a8a;
+        color: white;
+    }
+
+
+    tr:nth-child(even) {
+        background: #f4f6f8;
+    }
+
+
+    .edit-btn {
+        background: #f59e0b;
+        margin-right: 5px;
+    }
+
+
+    .delete-btn {
+        background: #dc2626;
+    }
+
+
+    .cancel-btn {
+        background: #6b7280;
+        display: none;
+    }
+
+
+    .edit-btn:hover {
+        background: #d97706;
+    }
+
+
+    .delete-btn:hover {
+        background: #b91c1c;
+    }
+
+
+    .cancel-btn:hover {
+        background: #4b5563;
+    }
+
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+
+
+    footer {
+        background: #1e3a8a;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+
+<header>
+
+    <h1>
+        School Management System
+    </h1>
+
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/about">
+            About Us
+        </a>
+
+        <a href="/students">
+            Students
+        </a>
+
+        <a href="/teachers">
+            Teachers
+        </a>
+
+        <a href="/subjects">
+            Subjects
+        </a>
+
+        <a href="/classes">
+            Classes
+        </a>
+
+        <a href="/contact">
+            Contact
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ========================= -->
+<!-- MAIN -->
+<!-- ========================= -->
+
+<main>
+
+
+    <h2>
+        Teachers Management
+    </h2>
+
+
+
+    <!-- ========================= -->
+    <!-- ADD / UPDATE TEACHER FORM -->
+    <!-- ========================= -->
+
+    <section class="form-section">
+
+
+        <h3 id="formTitle">
+            Add New Teacher
+        </h3>
+
+
+        <form id="teacherForm">
+
+
+            <!-- Hidden ID -->
+
+            <input
+                type="hidden"
+                id="teacherId"
+            >
+
+
+
+            <!-- TEACHER NAME -->
+
+            <label for="name">
+                Teacher Name:
+            </label>
+
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter teacher name"
+                required
+            >
+
+
+
+            <!-- SUBJECT -->
+
+            <label for="subject">
+                Subject:
+            </label>
+
+
+            <input
+                type="text"
+                id="subject"
+                name="subject"
+                placeholder="Example: Mathematics"
+                required
+            >
+
+
+
+            <!-- QUALIFICATION -->
+
+            <label for="qualification">
+                Qualification:
+            </label>
+
+
+            <input
+                type="text"
+                id="qualification"
+                name="qualification"
+                placeholder="Example: Bachelor's Degree"
+                required
+            >
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="button-group">
+
+
+                <button
+                    type="submit"
+                    id="submitBtn"
+                >
+                    Add Teacher
+                </button>
+
+
+
+                <button
+                    type="button"
+                    id="cancelBtn"
+                    class="cancel-btn"
+                    onclick="cancelEdit()"
+                >
+                    Cancel
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- TEACHERS TABLE -->
+    <!-- ========================= -->
+
+    <section class="teachers-section">
+
+
+        <h3>
+            Teachers List
+        </h3>
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Name</th>
+
+                    <th>Subject</th>
+
+                    <th>Qualification</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+
+            <tbody id="teachersTable">
+
+                <!-- Teachers will appear here -->
+
+            </tbody>
+
+
+        </table>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+    <p>
+        &copy; 2026 School Management System
+    </p>
+
+</footer>
+
+
+
+<!-- ========================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================= -->
+
+<script>
+
+
+    // =====================================
+    // GET HTML ELEMENTS
+    // =====================================
+
+    const teacherForm =
+        document.getElementById('teacherForm');
+
+    const teacherId =
+        document.getElementById('teacherId');
+
+    const nameInput =
+        document.getElementById('name');
+
+    const subjectInput =
+        document.getElementById('subject');
+
+    const qualification =
+        document.getElementById('qualification');
+
+    const submitBtn =
+        document.getElementById('submitBtn');
+
+    const cancelBtn = 
+        document.getElementById('cancelBtn');
+
+    const formTitle =
+        document.getElementById('formTitle');
+
+    const teachersTable =
+        document.getElementById('teachersTable');
+
+
+    // =====================================
+    // LOAD teacherS
+    // =====================================
+
+    function loadteachers() {
+
+        fetch('/api/teachers')
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        'Failed to load teachers'
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(teachers => {
+
+                // Clear table
+
+            teachersTable.innerHTML = '';
+    
+
+
+                // No students
+
+                if (teachers.length === 0) {
+
+                    teachersTable.innerHTML = `
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                style="text-align:center;"
+                            >
+                                No teachers found
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                // Add teachers to table
+
+                teachers.forEach(teacher => {
+
+                    const row =
+                        document.createElement('tr');
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${teacher.id}
+                        </td>
+
+                        <td>
+                            ${teacher.name}
+                        </td>
+
+                        <td>
+                            ${teacher.subject}
+                        </td>
+
+                        <td>
+                            ${teacher.qualification}
+                        </td>
+
+                        <td>
+
+                            <button
+                                class="edit-btn"
+                                onclick="editTeacher(
+                                    ${teacher.id},
+                                    '${teacher.name}',
+                                    '${teacher.subject}',
+                                    '${teacher.qualification}'
+                                )"
+                            >
+                                Edit
+                            </button>
+
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteTeacher(${teacher.id})"
+                            >
+                                Delete
+                            </button>
+
+                        </td>
+
+                    `;
+
+
+                    teachersTable.appendChild(row);
+
+                });
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    'Error loading teachers:',
+                    error
+                );
+
+            });
+
+    }
+
+
+    // Load students when page opens
+
+    loadTeachers();
+
+
+
+    // =====================================
+    // ADD OR UPDATE STUDENT
+    // =====================================
+
+    teacherForm.addEventListener(
+        'submit',
+        function(event) {
+
+            // Stop page refresh
+
+            event.preventDefault();
+
+
+            const name =
+                nameInput.value.trim();
+
+            const subject =
+                subjectInput.value.trim();
+
+            const qualification =
+                qualification.value.trim();
+
+
+            // Check fields
+
+            if (!name || !subject || !qualification) {
+
+                alert(
+                    'Please fill in all fields'
+                );
+
+                return;
+
+            }
+
+
+            // Get ID
+
+            const id =
+                teacherId.value;
+
+
+            // =================================
+            // UPDATE STUDENT
+            // =================================
+
+            if (id) {
+
+
+                fetch(
+                    '/api/teachers/' + id,
+                    {
+
+                        method: 'PUT',
+
+                        headers: {
+
+                            'Content-Type':
+                                'application/json'
+
+                        },
+
+                        body: JSON.stringify({
+
+                            name: name,
+
+                            subject: subject,
+
+                        qualification: qualification
+
+                        })
+
+                    }
+                )
+
+                    .then(response => {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                'Failed to update teacher'
+                            );
+
+                        }
+
+                        return response.json();
+
+                    })
+
+                    .then(data => {
+
+                        alert(
+                            data.message
+                        );
+
+
+                        // Reset form
+
+                        resetForm();
+
+
+                        // Reload table
+
+                        loadTeachers();
+
+                    })
+
+                    .catch(error => {
+
+                        console.error(
+                            error
+                        );
+
+                        alert(
+                            error.message
+                        );
+
+                    });
+
+
+            }
+
+
+            // =================================
+            // ADD NEW STUDENT
+            // =================================
+
+            else {
+
+
+                fetch(
+                    '/teachers',
+                    {
+
+                        method: 'POST',
+
+                        headers: {
+
+                            'Content-Type':
+                                'application/json'
+
+                        },
+
+                        body: JSON.stringify({
+
+                            name: name,
+
+                            subject: subject,
+
+                            qualification: qualification
+
+                        })
+
+                    }
+                )
+
+                    .then(response => {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                'Failed to add teacher'
+                            );
+
+                        }
+
+                        return response.text();
+
+                    })
+
+                    .then(data => {
+
+                        alert(
+                            'teacher  added successfully'
+                        );
+
+
+                        // Reset form
+
+                        teacherForm.reset();
+
+
+                        // Reload teachers
+
+                        loadteachers();
+
+                    })
+
+                    .catch(error => {
+
+                        console.error(
+                            error
+                        );
+
+                        alert(
+                            error.message
+                        );
+
+                    });
+
+
+            }
+
+        }
+    );
+
+
+
+    // =====================================
+    // EDIT STUDENT
+    // =====================================
+
+    function editTeacher(
+        id,
+        name,
+        subject,
+        qualification
+    ) {
+
+
+        // Put student data into form
+
+        teacherId.value = id;
+
+        nameInput.value = name;
+
+        subjectInput.value = subject;
+
+    qualificationInput.value = qualification;
+
+
+        // Change form title
+
+        formTitle.textContent =
+            'Edit Teacher';
+
+
+        // Change button text
+
+        submitBtn.textContent =
+            'Update Teacher';
+
+
+        // Show cancel button
+
+        cancelBtn.style.display =
+            'block';
+
+
+        // Scroll to form
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: 'smooth'
+
+        });
+
+
+    }
+
+
+
+    // =====================================
+    // CANCEL EDIT
+    // =====================================
+
+    function cancelEdit() {
+
+        resetForm();
+
+    }
+
+
+
+    // =====================================
+    // RESET FORM
+    // =====================================
+
+    function resetForm() {
+
+
+        // Clear all inputs
+
+        teacherForm.reset();
+
+
+        // Remove ID
+
+        teacherId.value = '';
+
+
+        // Restore title
+
+        formTitle.textContent =
+            'Add New Teacher';
+
+
+        // Restore button
+
+        submitBtn.textContent =
+            'Add Teacher';
+
+
+        // Hide cancel button
+
+        cancelBtn.style.display =
+            'none';
+
+    }
+
+
+
+    // =====================================
+    // DELETE STUDENT
+    // =====================================
+
+    function deleteTeacher(id) {
+
+
+        const confirmDelete =
+            confirm(
+                'Are you sure you want to delete this teacher?'
+            );
+
+
+        // Stop deletion
+
+        if (!confirmDelete) {
+
+            return;
+
+        }
+
+
+        fetch(
+            '/api/teachers/' + id,
+            {
+
+                method: 'DELETE'
+
+            }
+        )
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        'Failed to delete teacher'
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(data => {
+
+
+                alert(
+                    data.message
+                );
+
+
+                // Reload students
+
+                loadTeachers();
+
+
+            })
+
+            .catch(error => {
+
+
+                console.error(
+                    error
+                );
+
+
+                alert(
+                    error.message
+                );
+
+
+            });
+
+
+    }
+
+
+</script>
+```
+
+</body>
+
+</html>

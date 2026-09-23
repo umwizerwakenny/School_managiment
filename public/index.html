@@ -1,0 +1,203 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>School Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 15px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 40px 20px;
+        }
+
+        .hero {
+            background: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #1e3a8a;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #1e3a8a;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #162d6b;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin-bottom: 15px;
+        }
+
+        .card a {
+            color: #1e3a8a;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>School Management System</h1>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/students">Students</a>
+            <a href="/teachers">Teachers</a>
+            <a href="/subjects">Subjects</a>
+            <a href="/classes">Classes</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <h2>Welcome to School Management System</h2>
+
+            <p>
+                Manage students, teachers, classes and subjects
+                easily in one system.
+            </p>
+
+            <a href="/students" class="btn">
+                Manage Students
+            </a>
+        </section>
+
+        <section class="features">
+
+            <div class="card">
+                <h3>Students</h3>
+                <p>
+                    Add, view, update and delete student information.
+                </p>
+                <a href="/students">View Students</a>
+            </div>
+
+            <div class="card">
+                <h3>Teachers</h3>
+                <p>
+                    Manage teachers and their subjects.
+                </p>
+                <a href="/teachers">View Teachers</a>
+            </div>
+
+            <div class="card">
+                <h3>Classes</h3>
+                <p>
+                    Manage school classes and trades.
+                </p>
+                <a href="/classes">View Classes</a>
+            </div>
+
+            <div class="card">
+                <h3>Subjects</h3>
+                <p>
+                    Manage subjects taught in the school.
+                </p>
+                <a href="/subjects">View Subjects</a>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 School Management System</p>
+    </footer>
+
+</body>
+</html>
+```
